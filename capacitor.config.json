@@ -1,0 +1,9 @@
+{
+  "appId": "io.github.gnotesamsung7hue.matthewssandbox",
+  "appName": "Matthew's Sandbox",
+  "webDir": "www",
+  "android": {
+    "adjustMarginsForEdgeToEdge": "force",
+    "backgroundColor": "#cfe8e4"
+  }
+}
