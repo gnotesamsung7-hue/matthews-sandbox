@@ -39,6 +39,21 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: Allow the microphone (for the sound studio)
+        run: |
+          f=android/app/src/main/AndroidManifest.xml
+          sed -i 's#<application#<uses-permission android:name="android.permission.RECORD_AUDIO" />\n    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />\n    <application#' $f
+          cat $f
+
+      - name: Add the Wi-Fi play code (LanLink)
+        run: |
+          d=android/app/src/main/java/io/github/gnotesamsung7hue/matthewssandbox
+          mkdir -p $d
+          cp native/LanLinkPlugin.java native/MainActivity.java $d/
+          f=android/app/src/main/AndroidManifest.xml
+          sed -i 's#<application#<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />\n    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />\n    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />\n    <application#' $f
+          ls $d
+
       - name: Set the app name (the apostrophe needs escaping on Android)
         run: |
           f=android/app/src/main/res/values/strings.xml
